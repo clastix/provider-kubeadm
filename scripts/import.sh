@@ -40,6 +40,6 @@ import_image() {
 }
 
 # find all tar files recursively
-find -L "$CONTENT_PATH" -name "*.tar" -type f | while read -r tarfile; do
+find -L "$CONTENT_PATH" -name "*.tar" -type f | sort | while read -r tarfile; do
   import_image "$tarfile"
 done
