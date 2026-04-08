@@ -103,10 +103,6 @@ upload_kubelet_config() {
   kubeadm init phase upload-config kubelet --config "$root_path"/opt/kubeadm/kubelet-config.yaml
 }
 
-restart_kubelet() {
-  systemctl restart kubelet
-}
-
 regenerate_etcd_manifests() {
   until kubectl --kubeconfig=/etc/kubernetes/admin.conf get cs > /dev/null
   do
@@ -143,4 +139,3 @@ fi
 regenerate_kubelet_config
 regenerate_kubelet_envs
 update_file_permissions
-restart_kubelet
