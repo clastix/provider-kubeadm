@@ -74,8 +74,6 @@ regenerate_apiserver_certs_sans() {
   info "deleted existing apiserver pod"
 
   kubeadm init phase upload-config kubeadm --config "$root_path"/opt/kubeadm/cluster-config.yaml
-
-  restart_kubelet
 }
 
 regenerate_kubelet_envs() {
@@ -90,8 +88,6 @@ regenerate_kubelet_envs() {
         kubeadm init phase kubeconfig kubelet
     fi
   fi
-
-  systemctl restart kubelet
 }
 
 regenerate_kubelet_config() {
@@ -137,7 +133,6 @@ update_file_permissions() {
   fi
 }
 
-restart_kubelet
 if [ "$node_role" != "worker" ];
 then
   regenerate_kube_components_manifests
