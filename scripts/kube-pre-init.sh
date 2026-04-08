@@ -20,14 +20,14 @@ systemctl daemon-reload
 if [ -f "$root_path"/opt/spectrocloud/kubeadm/bin/kubelet ]; then
   cp "$root_path"/opt/spectrocloud/kubeadm/bin/kubelet "$root_path"/usr/local/bin/kubelet
   systemctl daemon-reload
-  systemctl enable kubelet && systemctl restart kubelet
+  systemctl enable kubelet
   rm -rf "$root_path"/opt/spectrocloud/kubeadm/bin/kubelet
 fi
 
 if [ ! -f "$root_path"/usr/local/bin/kubelet ]; then
   mkdir -p "$root_path"/usr/local/bin
   cp "$root_path"/opt/kubeadm/bin/kubelet "$root_path"/usr/local/bin/kubelet
-  systemctl enable kubelet && systemctl start kubelet
+  systemctl enable kubelet
 fi
 
 if systemctl cat spectro-containerd >/dev/null 2<&1; then
