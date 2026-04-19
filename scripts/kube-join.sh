@@ -71,13 +71,5 @@ if [ "$PROXY_CONFIGURED" = true ]; then
     restore_kube_vip_manifest_after_reset
   done;
 else
-  until kubeadm join --config "$root_path"/opt/kubeadm/kubeadm.yaml --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests -v=5 > /dev/null
-  do
-   backup_kube_vip_manifest_if_present
-   echo "failed to apply kubeadm join, will retry in 10s";
-   do_kubeadm_reset
-   echo "retrying in 10s"
-   sleep 10;
-   restore_kube_vip_manifest_after_reset
-  done;
+  kubeadm join --config "$root_path"/opt/kubeadm/kubeadm.yaml --ignore-preflight-errors=DirAvailable--etc-kubernetes-manifests -v=5
 fi
